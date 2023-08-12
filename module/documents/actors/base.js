@@ -1,3 +1,5 @@
+import { findHighestValue } from '../../helpers.js';
+
 export class ODActor extends Actor {
     prepareData() {
         super.prepareData();
@@ -8,38 +10,55 @@ export class ODActor extends Actor {
     }
 
     computeAttributeModifiers() {
+        const modifiers = {
+            0: -2,
+            3: -2,
+            4: -1,
+            8: 0,
+            14: 1,
+            18: 2,
+        };
+
         for (const attribute in this.system.attributes) {
             const score = this.system.attributes[attribute].score;
-            if (score === 18) {
-                this.system.attributes[attribute].mod = 2;
-                continue;
-            } else if (score >= 14 && score <= 17) {
-                this.system.attributes[attribute].mod = 1;
-                continue;
-            } else if (score >= 8 && score <= 13) {
-                this.system.attributes[attribute].mod = 0;
-                continue;
-            } else if (score >= 4 && score <= 7) {
-                this.system.attributes[attribute].mod = -1;
-                continue;
-            } else {
-                this.system.attributes[attribute].mod = -2;
-                continue;
-            }
+            this.system.attributes[attribute].mod = modifiers[findHighestValue(modifiers, score)];
         }
     }
 
-    // Implemented by subclasses
-    calculateHitDie() {}
+    async _preUpdate(changed, options, user) {
+        await super._preUpdate(changed, options, user);
 
-    // Implemented by sublcasses
-    calculateSaves() {}
+        if ('hp' in (changed.system || {})) {
+            const currentHp = this.system.hp.value;
+            const changedHp = changed.system.hp.value;
+            const newHp = Math.clamped(changedHp, 0, this.system.hp.max);
+            const hpDelta = newHp - currentHp;
+            changed.system.hp.value = newHp;
 
-    rollHP() {
-        // TODO: roll new level HP
+            options.dhp = hpDelta;
+        }
     }
 
-    rollSkill(skill) {
-        // TODO: roll skill
+    _onUpdate(data, options, userId) {
+        super._onUpdate(data, options, userId);
+        this._displayScrollingDamage(options.dhp);
+    }
+
+    _displayScrollingDamage(dhp) {
+        if (!dhp) return;
+        dhp = Number(dhp);
+        const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
+        for (const t of tokens) {
+            if (!t.visible || !t.renderable) continue;
+            const pct = Math.clamped(Math.abs(dhp) / this.system.hp.max, 0, 1);
+            canvas.interface.createScrollingText(t.center, dhp.signedString(), {
+                anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+                fontSize: 16 + 32 * pct, // Range between [16, 48]
+                fill: dhp < 0 ? 'red' : 'green',
+                stroke: 0x000000,
+                strokeThickness: 4,
+                jitter: 0.25,
+            });
+        }
     }
 }
