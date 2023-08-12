@@ -4,10 +4,8 @@
         <div>
             {{document.system.encumbrance.readied.value}} / {{document.system.encumbrance.readied.max}}
         </div>
-        <div class="encumbrance-status">
-            {{#unless (eq document.system.encumbrance.readied.status "unencumbered")}}
-                {{ encumbranceStatuses.readied }}
-            {{/unless}}
+        <div class="encumbrance-status{{#if (eq document.system.encumbrance.readied.status "unencumbered")}} status-hidden{{/if}}">
+            {{ encumbranceStatuses.readied }}
         </div>
     </div>
 </div>
@@ -18,10 +16,8 @@
         <div>
             {{document.system.encumbrance.stowed.value}} / {{document.system.encumbrance.stowed.max}}
         </div>
-        <div class="encumbrance-status">
-            {{#unless (eq document.system.encumbrance.stowed.status "unencumbered")}}
-                {{ encumbranceStatuses.stowed }}
-            {{/unless}}
+        <div class="encumbrance-status{{#if (eq document.system.encumbrance.stowed.status "unencumbered")}} status-hidden{{/if}}">
+            {{ encumbranceStatuses.stowed }}
         </div>
     </div>
 </div>

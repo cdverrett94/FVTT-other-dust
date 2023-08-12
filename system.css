@@ -240,6 +240,7 @@
         grid-template-columns: 10fr 1fr auto auto auto auto;
         grid-gap: var(--grid-gap);
         align-items: center;
+        padding-right: 5px;
     }
 
     .od-subheader.item .item-name {
@@ -257,7 +258,7 @@
 
     .equipment-tab {
         display: grid;
-        grid-template-columns: 5fr 1fr;
+        grid-template-columns: 3.95fr 1fr;
         grid-gap: var(--grid-gap);
     }
 
@@ -288,7 +289,11 @@
     }
 
     .encumbrance-status {
-        font-size: 0.66rem;
+        font-size: 0.8rem;
+
+        &.status-hidden {
+            visibility: hidden;
+        }
     }
 
     /* Begin Tabs */
