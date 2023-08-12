@@ -9,6 +9,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                         initial: 0,
                         min: 0,
                         integer: true,
+                        nullable: false,
                     }),
                 }),
                 dexterity: new fields.SchemaField({
@@ -17,6 +18,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                         initial: 0,
                         min: 0,
                         integer: true,
+                        nullable: false,
                     }),
                 }),
                 constitution: new fields.SchemaField({
@@ -25,6 +27,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                         initial: 0,
                         min: 0,
                         integer: true,
+                        nullable: false,
                     }),
                 }),
                 wisdom: new fields.SchemaField({
@@ -33,6 +36,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                         initial: 0,
                         min: 0,
                         integer: true,
+                        nullable: false,
                     }),
                 }),
                 intelligence: new fields.SchemaField({
@@ -41,6 +45,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                         initial: 0,
                         min: 0,
                         integer: true,
+                        nullable: false,
                     }),
                 }),
                 charisma: new fields.SchemaField({
@@ -49,6 +54,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                         initial: 0,
                         min: 0,
                         integer: true,
+                        nullable: false,
                     }),
                 }),
             }),
@@ -57,11 +63,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                     required: true,
                     initial: 1,
                     integer: true,
-                }),
-                min: new fields.NumberField({
-                    required: true,
-                    initial: 0,
-                    integer: true,
+                    min: 0,
                 }),
                 max: new fields.NumberField({
                     required: true,
@@ -84,9 +86,6 @@ export class CharacterData extends foundry.abstract.DataModel {
                 }),
                 biography: new fields.HTMLField(),
                 faction: new fields.StringField(),
-            }),
-            credits: new fields.NumberField({
-                initial: 0,
             }),
             currency: new fields.SchemaField({
                 held: new fields.NumberField({
