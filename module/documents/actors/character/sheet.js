@@ -1,6 +1,6 @@
 import { attributes } from '../../../constants/attributes.js';
 import { saves } from '../../../constants/saves.js';
-import { simplifyRollFormula } from '../../../helpers/simplifyRollFormula.js';
+import { simplifyRollFormula } from '../../../helpers.js';
 
 export class ODCharacterSheet extends ActorSheet {
     constructor(...args) {

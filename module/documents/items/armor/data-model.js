@@ -1,5 +1,3 @@
-import { attributes } from '../../../constants/attributes.js';
-
 export class ArmorData extends foundry.abstract.DataModel {
     static defineSchema() {
         const fields = foundry.data.fields;

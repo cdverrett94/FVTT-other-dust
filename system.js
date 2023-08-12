@@ -1,24 +1,23 @@
 import { ODActorProxy } from './module/documents/actors/actor-proxy.js';
 import { CharacterData } from './module/documents/actors/character/data-model.js';
 import { ODCharacterSheet } from './module/documents/actors/character/sheet.js';
+import { AbilityData } from './module/documents/items/ability/data-model.js';
+import { ODAbilitySheet } from './module/documents/items/ability/sheet.js';
+import { ArmorData } from './module/documents/items/armor/data-model.js';
+import { ODArmorSheet } from './module/documents/items/armor/sheet.js';
+import { BackgroundData } from './module/documents/items/background/data-model.js';
+import { ODBackgroundSheet } from './module/documents/items/background/sheet.js';
+import { ClassData } from './module/documents/items/class/data-model.js';
+import { ODClassSheet } from './module/documents/items/class/sheet.js';
+import { GearData } from './module/documents/items/gear/data-model.js';
+import { ODGearSheet } from './module/documents/items/gear/sheet.js';
 import { ODItemProxy } from './module/documents/items/item-proxy.js';
 import { SkillData } from './module/documents/items/skill/data-model.js';
 import { ODSkillSheet } from './module/documents/items/skill/sheet.js';
-import { ODClassSheet } from './module/documents/items/class/sheet.js';
-import { ClassData } from './module/documents/items/class/data-model.js';
-import { BackgroundData } from './module/documents/items/background/data-model.js';
-import { ODBackgroundSheet } from './module/documents/items/background/sheet.js';
-import { ODWeaponSheet } from './module/documents/items/weapon/sheet.js';
-import { WeaponData } from './module/documents/items/weapon/data-model.js';
-import { ArmorData } from './module/documents/items/armor/data-model.js';
-import { ODArmorSheet } from './module/documents/items/armor/sheet.js';
-import { ODAbilitySheet } from './module/documents/items/ability/sheet.js';
-import { ODTrainingSheet } from './module/documents/items/training/sheet.js';
-import { ODGearSheet } from './module/documents/items/gear/sheet.js';
 import { TrainingData } from './module/documents/items/training/data-model.js';
-import { GearData } from './module/documents/items/gear/data-model.js';
-import { AbilityData } from './module/documents/items/ability/data-model.js';
-import { ODRoll } from './module/rolls/od-rolls.js';
+import { ODTrainingSheet } from './module/documents/items/training/sheet.js';
+import { WeaponData } from './module/documents/items/weapon/data-model.js';
+import { ODWeaponSheet } from './module/documents/items/weapon/sheet.js';
 
 Hooks.on('init', () => {
     // System Data Models
@@ -143,7 +142,8 @@ Hooks.on('renderChatMessage', async (document, $html) => {
 
     if (rollDamageButton) {
         rollDamageButton.addEventListener('click', async (event) => {
-            const actor = await fromUuid(rollDamageButton.dataset.actorUuid);
+            let actor = await fromUuid(rollDamageButton.dataset.actorUuid);
+            if (actor.constructor.name === 'TokenDocument') actor = actor.actor;
             const targetUuid = rollDamageButton.dataset.targetUuid;
             const weaponId = rollDamageButton.dataset.weaponId;
             actor?.sheet.rollWeaponDamage(weaponId, {
@@ -156,12 +156,13 @@ Hooks.on('renderChatMessage', async (document, $html) => {
     if (damageTargetButton) {
         damageTargetButton.addEventListener('click', async (event) => {
             const actorId = damageTargetButton.dataset.targetUuid ?? canvas.tokens.controlled[0]?.actor.uuid;
+            if (!actorId) return ui.notifications.error('No target selected');
             let actor = await fromUuid(actorId);
             if (actor.constructor.name === 'TokenDocument') actor = actor.actor;
 
             const oldHp = actor.system.hp.value;
             const damage = document.rolls[0].total;
-            const newHp = Math.max(0, oldHp - damage);
+            const newHp = oldHp - damage;
 
             actor.update({ 'system.hp.value': newHp });
         });

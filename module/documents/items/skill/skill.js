@@ -1,4 +1,4 @@
-import { ODItem } from "../base.js";
+import { ODItem } from '../base.js';
 
 export class ODSkillItem extends ODItem {
     get rank() {
@@ -10,6 +10,6 @@ export class ODSkillItem extends ODItem {
     }
 
     get combat() {
-        return this.system.combat
+        return this.system.combat;
     }
 }

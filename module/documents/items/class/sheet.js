@@ -1,6 +1,5 @@
 import { attributes } from '../../../constants/attributes.js';
 import { saves } from '../../../constants/saves.js';
-import { ODSkillItem } from '../skill/skill.js';
 
 export class ODClassSheet extends ItemSheet {
     static get defaultOptions() {

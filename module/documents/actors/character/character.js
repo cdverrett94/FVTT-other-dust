@@ -1,5 +1,5 @@
+import { simplifyRollFormula } from '../../../helpers.js';
 import { ODActor } from '../base.js';
-import { simplifyRollFormula } from '../../../helpers/simplifyRollFormula.js';
 
 export class ODCharacterActor extends ODActor {
     prepareDerivedData() {
