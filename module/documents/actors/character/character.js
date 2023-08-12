@@ -1,4 +1,5 @@
-import { simplifyRollFormula } from '../../../helpers.js';
+import { classSaveAndAttackLevels, encumbranceStatuses } from '../../../constants.js';
+import { findHighestValue, simplifyRollFormula } from '../../../helpers.js';
 import { ODActor } from '../base.js';
 
 export class ODCharacterActor extends ODActor {
@@ -70,12 +71,11 @@ export class ODCharacterActor extends ODActor {
     calculateSavesAndBonus() {
         if (this.class) {
             const level = this.system.details.level;
-            let saveAndAttackLevel = Math.ceil(level / 3) * 3 - 2;
+            let saveAndAttackLevel = findHighestValue(classSaveAndAttackLevels, level);
             const savesForLevel = this.class.system.savesAndAttack[saveAndAttackLevel];
 
             this.system.saves = {};
             for (const save in savesForLevel) {
-                if (save === 'attack') continue;
                 this.system.saves[save] = savesForLevel[save];
             }
             this.system.combat.attack = savesForLevel.attack;
@@ -104,30 +104,29 @@ export class ODCharacterActor extends ODActor {
         this.system.combat.ac = totalAC;
     }
 
+    _calculateItemsEncumbrance(items) {
+        return items.reduce((accumulator, current) => {
+            return accumulator + current.system.encumbrance;
+        }, 0);
+    }
+
     calculateEncumbrance() {
         const equipmentList = [...this.weapons, ...this.armor, ...this.gear];
         const readiedItems = equipmentList.filter((item) => item.system.status === 'readied');
         const stowedItems = equipmentList.filter((item) => item.system.status === 'stowed');
 
-        const readiedEncumbrance = readiedItems.reduce((accumulator, current) => {
-            return accumulator + current.system.encumbrance;
-        }, 0);
+        const readiedEncumbrance = this._calculateItemsEncumbrance(readiedItems);
 
-        const stowedEncumbrance = stowedItems.reduce((accumulator, current) => {
-            return accumulator + current.system.encumbrance;
-        }, 0);
+        const stowedEncumbrance = this._calculateItemsEncumbrance(stowedItems);
 
         const maxReadiedEncumbrance = Math.floor(this.system.attributes.strength.score / 2);
         const maxStowedEncumbrance = this.system.attributes.strength.score;
 
         const encumbranceStatus = (type, currentEncumbrance, maxEncumbrance) => {
             const extraEncumbrance = type === 'readied' ? 2 : 4;
-            const difference = currentEncumbrance - maxEncumbrance;
-            if (difference <= 0) return 'unencumbered';
-            if (Math.ceil(difference / extraEncumbrance) < 3) {
-                return Math.ceil(difference / extraEncumbrance) === 1 ? 'lightly' : 'heavily';
-            }
-            return 'over';
+            const difference = Math.max(currentEncumbrance - maxEncumbrance, 0);
+            const index = Math.ceil(difference / extraEncumbrance);
+            return encumbranceStatuses[index];
         };
 
         const readiedEncumbranceStatus = encumbranceStatus('readied', readiedEncumbrance, maxReadiedEncumbrance);
