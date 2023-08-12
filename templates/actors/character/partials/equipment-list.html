@@ -25,7 +25,7 @@
     <div class="item-encumbrance">
         {{equipment.system.encumbrance}}
     </div>
-    <div class="equip-item pointer{{#if (eq equipment.system.status "readied")}} readied{{/if}}" data-tooltip="{{#if (eq equipment.system.status "readied")}}Unequip{{else}}Equip{{/if}} Item">
+    <div class="equip-item pointer{{#if (eq equipment.system.status "readied")}} readied{{/if}}" data-tooltip="{{#if (eq equipment.system.status "readied")}}{{localize "OD.Equipment.Encumbrance.Stow.Title"}}{{else}}{{localize "OD.Equipment.Encumbrance.Ready.Title"}}{{/if}} Item">
         <i class="fa-solid fa-shirt"></i>
     </div>
     <div class="drop-item pointer{{#if (eq equipment.system.status "dropped")}} dropped{{/if}}" data-tooltip="{{#if (eq equipment.system.status "dropped")}}Pick Up{{else}}Drop{{/if}} Item">
