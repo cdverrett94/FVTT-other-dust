@@ -1,5 +1,6 @@
 const findHighestValue = (table, value) => {
-    let closest = Object.keys(table).reduce(function (prev, curr) {
+    if (!Array.isArray(table)) table = Object.keys(table);
+    let closest = table.reduce(function (prev, curr) {
         curr = Number(curr);
         prev = Number(prev);
         return value >= curr && curr >= prev ? curr : prev;
