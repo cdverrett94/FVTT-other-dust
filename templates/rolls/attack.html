@@ -1,0 +1,26 @@
+<div class="od-container od-roll">
+    <div class="od-header">{{weapon.name}} {{localize "OD.Combat.Attack"}}</div>
+    <div class="roll-flavor attack-result">
+        {{#if isCritical}}
+        {{localize "OD.Combat.Critically"}} 
+        {{/if}}
+        {{#if result}}
+        {{localize "OD.Combat.Hits"}}
+        {{else}}
+        {{localize "OD.Combat.Misses"}}
+        {{/if}}
+        {{#if target.name}}{{target.name}}'s {{localize "OD.Combat.ac.Title"}} of {{target.ac}}{{/if}}
+    </div>
+    <div class="dice-roll">
+        <div class="dice-result">
+            <div class="dice-formula">{{roll.formula}}</div>
+            <div class="dice-tooltip">{{{tooltip}}}</div>
+            <h4 class="dice-total">{{roll.total}}</h4>
+        </div>
+    </div>
+    {{#if (not result)}}
+        <div class="roll-damage" data-weapon-id="{{weapon.id}}" data-actor-uuid="{{actor.uuid}}" {{#if target.uuid}}data-target-uuid="{{target.uuid}}"{{/if}}>
+            <button>{{localize "OD.Roll"}} {{localize "OD.Equipment.Damage"}}</button>
+        </div>
+    {{/if}}
+</div>

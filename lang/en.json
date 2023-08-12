@@ -1,0 +1,124 @@
+{
+    "OD": {
+        "Attributes": {
+            "Title": "Attribute",
+            "strength": {
+                "Title": "Strength",
+                "Abbreviation": "STR"
+            },
+            "constitution": {
+                "Title": "Constitution",
+                "Abbreviation": "CON"
+            },
+            "dexterity": {
+                "Title": "Dexterity",
+                "Abbreviation": "DEX"
+            },
+            "intelligence": {
+                "Title": "Intelligence",
+                "Abbreviation": "INT"
+            },
+            "wisdom": {
+                "Title": "Wisdom",
+                "Abbreviation": "WIS"
+            },
+            "charisma": {
+                "Title": "Charisma",
+                "Abbreviation": "CHA"
+            }
+        },
+        "Saves": {
+            "Title": "Save",
+            "evasion": "Evasion",
+            "luck": "Luck",
+            "mental": "Mental",
+            "physical": "Physical",
+            "tech": "Tech",
+            "Failure": "Failure",
+            "Success": "Success",
+            "Flavor": "{result} against a DC of {target}"
+        },
+        "Combat": {
+            "Attack": "Attack",
+            "ac": {
+                "Abbreviation": "AC",
+                "Title": "Armor Class"
+            },
+            "Critically": "Critically",
+            "Hits": "Hits",
+            "Misses": "Misses"
+        },
+        "SavesAndAttack": "Attack Bonus and Saving Throws",
+        "Details": {
+            "Class": {
+                "Title": "Class",
+                "PrimeAttributes": "Prime Attributes",
+                "ClassTraits": "Class Traits",
+                "Ability": "Ability",
+                "NoAbility": "No ability set for class",
+                "DropAbility": "Drop ability from sidebar"
+            },
+            "Background": "Background",
+            "Training": "Training",
+            "XP": "XP",
+            "Level": "Level",
+            "Faction":"Faction",
+            "HP": {
+                "Title": "HP",
+                "Max": "Max HP",
+                "HD": "Hit Die"
+            },
+            "Credits": "Credits",
+            "Bank": "Bank"
+        },
+        "Equipment": {
+            "Title": "Equipment",
+            "Weapons": "Weapons",
+            "Armor": "Armor",
+            "Gear": "Gear",
+            "TechLevel": "Tech Level",
+            "Damage": "Damage",
+            "Range": "Range",
+            "Magazine": "Magazine Size",
+            "Shield": "Is Shield",
+            "Encumbrance": {
+                "Title": "Encumbrance",
+                "Ready": {
+                    "Readied": "Readied",
+                    "Title": "Ready"
+                },
+                "Stow": {
+                    "Stowed": "Stowed",
+                    "Title": "Stow"
+                },
+                "over": "Over Encumbered",
+                "heavily": "Heavily Encumbered",
+                "lightly": "Lightly Encumbered",
+                "unencumbered": "Unencumbered"
+            },
+            "Cost": "Cost"
+        },
+        "Skills": {
+            "Singular": "Skill",
+            "Plural": "Skills",
+            "Rank": "Rank",
+            "DefaultAttribute": "Default Attribute",
+            "Untrained": "Untrained",
+            "Trained": "Trained",
+            "Professional":"Professional",
+            "Expert": "Expert",
+            "Master": "Master",
+            "Legendary": "Legendary",
+            "CombatSkill": "Is Combat Skill"
+        },
+        "Description": "Description",
+        "Movement": "Movement",
+        "Name": "Name",
+        "Total": "Total",
+        "Notes": "Notes",
+        "Roll": "Roll",
+        "Check": "Check",
+        "Target": "Target",
+        "Selected": "Selected"
+    }
+}

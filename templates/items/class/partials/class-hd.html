@@ -1,0 +1,19 @@
+<div class="class-hd-header od-header">{{localize "OD.Details.HP.HD"}}</div>
+<div class="od-subheader">
+    <div class="class-hd-level">{{localize "OD.Details.Level"}}</div>
+    <div class="class-hd-die">{{localize "OD.Details.HP.HD"}}</div>
+</div>
+<div class="class-hd-body">
+    {{#each document.system.hd}}
+    <div class="class-hd">
+        <div class="class-hd-level">{{@key}}{{#if @last}}+{{/if}}:</div>
+        <div class="class-hd-die">
+            {{#if (or ../document.isOwned (not ../document.isOwner))}}
+            {{this}}
+            {{else}}
+            <input type="text" name="system.hd.{{@key}}" value="{{this}}" />
+            {{/if}}
+        </div>
+    </div>
+    {{/each}}
+</div>

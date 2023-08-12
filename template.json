@@ -1,0 +1,19 @@
+{
+    "Actor": {
+        "types": ["character", "monster"],
+        "htmlFields": ["details.biography"]
+    },
+    "Item": {
+        "types": [
+            "class",
+            "ability",
+            "training",
+            "background",
+            "weapon",
+            "armor",
+            "gear",
+            "skill"
+        ],
+        "htmlFields": ["description"]
+    }
+}

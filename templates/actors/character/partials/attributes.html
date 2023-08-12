@@ -1,0 +1,21 @@
+
+
+{{#each document.system.attributes}}
+    <div class="attribute od-container">
+        {{#with (lookup ../attributes @key)}}
+        <div 
+        class="od-header pointer roll-attribute"
+        data-attribute="{{@key}}" 
+        data-tooltip="Roll {{title}} {{#if ../this.score}}Check{{else}}Score{{/if}}" 
+        data-tooltip-direction="UP">
+            {{abbreviation}}
+        </div>
+        {{/with}}
+        <div>
+            <input class="attribute-score" name="system.attributes.{{@key}}.score" type="number" value="{{this.score}}" placeholder="0" data-dtype="Number" />
+        </div>
+        <div>
+            {{this.mod}}
+        </div>
+    </div>
+{{/each}}

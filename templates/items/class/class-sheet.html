@@ -1,0 +1,100 @@
+<form>
+    <div class="item-sheet class-sheet class-container">
+        <div class="od-header item-sheet-header">
+            {{#if (or document.isOwned (not document.isOwner))}}
+            {{document.name}}
+            {{else}}
+            <input type="text" name="name" value="{{document.name}}">
+            {{/if}}
+        </div>
+
+        <div class="class-details">
+            <div class="class-description {{#unless document.isOwned}} editable-item{{/unless}}">
+                {{#if (or document.isOwned (not document.isOwner))}}
+                {{{enrichedDescription}}}
+                {{else}}
+                {{editor enrichedDescription target="system.description" editable=true collaborate=true engine="prosemirror"}}
+                {{/if}}
+            </div>
+            <div class="class-traits">
+                <div class="od-header item-sheet-header">{{localize "OD.Details.Class.ClassTraits"}}</div>
+                <div class="class-attributes">
+                    <div class="od-subheader">{{localize "OD.Details.Class.PrimeAttributes"}}</div>
+                    <div class="trait-section">
+                        {{#if (or document.isOwned (not document.isOwner))}}
+                        {{#with (lookup attributesText document.system.primeAttributes.first)}}
+                        {{title}}
+                        {{/with}}
+                         or 
+                        {{#with (lookup attributesText document.system.primeAttributes.second)}}
+                        {{title}}
+                        {{/with}}
+                        {{else}}
+                        <div class="class-attribute-choices">
+                            <div>
+                                <select name="system.primeAttributes.first">
+                                    {{#each attributes}}
+                                    {{#unless (eq this ../document.system.primeAttributes.second)}}
+                                        {{#with (lookup ../attributesText this)}}
+                                        <option value="{{../this}}" {{#if (eq ../this ../../document.system.primeAttributes.first)}}selected{{/if}}>{{title}}</option>
+                                        {{/with}}
+                                    {{/unless}}
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div>or</div>
+                            <div>
+                                <select name="system.primeAttributes.second">
+                                    {{#each attributes}}
+                                    {{#unless (eq this ../document.system.primeAttributes.first)}}
+                                    {{#with (lookup ../attributesText this)}}
+                                    <option value="{{../this}}" {{#if (eq ../this ../../document.system.primeAttributes.second)}}selected{{/if}}>{{title}}</option>
+                                    {{/with}}
+                                    {{/unless}}
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="class-skills">
+                    <div class="od-subheader">{{document.name}} {{localize "OD.Details.Class.Title"}} {{localize "OD.Skills.Plural"}}</div>
+                    <div class="trait-section">
+                        {{#if (or document.isOwned (not document.isOwner))}}
+                        {{document.system.skillsText}}
+                        {{else}}
+                        <textarea name="system.skillsText" rows="6">{{document.system.skillsText}}</textarea>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="class-ability">
+                    <div class="od-subheader">{{localize "OD.Details.Class.Title"}} {{localize "OD.Details.Class.Ability"}}: {{document.system.ability.name}}</div>
+                    <div class="trait-section">
+                        {{#if (or document.isOwned (not document.isOwner))}}
+                            {{#if document.system.ability}}
+                            {{{enrichedAbilityDescription}}}
+                            {{else}}
+                            {{localize "OD.Details.Class.NoAbility"}}
+                            {{/if}}
+                        {{else}}
+                            {{#if document.system.ability}}
+                            {{{enrichedAbilityDescription}}}
+                            {{else}}
+                            {{localize "OD.Details.Class.DropAbility"}}
+                            {{/if}}
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="class-hd-saves">
+            <div class="class-hd-container">
+                {{> "systems/other-dust/templates/items/class/partials/class-hd.html"}}            
+            </div>
+            <div class="class-saves-container">
+                {{> "systems/other-dust/templates/items/class/partials/class-saves.html"}}
+            </div>
+        </div>
+    </div>
+</form>

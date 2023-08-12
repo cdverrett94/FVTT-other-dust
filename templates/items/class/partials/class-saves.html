@@ -1,0 +1,25 @@
+<div class="class-saves-header od-header">{{localize "OD.SavesAndAttack"}}</div>
+<div class="od-subheader">
+    <div class="class-saves-level">{{localize "OD.Details.Level"}}</div>
+    {{#each saves as | save |}}
+    {{#unless (eq save 'ac')}}<div class="class-saves-{{save}}">{{lookup @root.savesText save}}</div>{{/unless}}
+    {{/each}}
+</div>
+<div class="class-saves-body">
+    {{#each document.system.savesAndAttack as | level |}}
+    <div class="class-save">
+        <div class="class-saves-level">{{@key}} - {{add @key 2}}</div>
+        {{#each level as | save |}}
+        {{#unless (eq @key 'ac')}}
+        <div class="class-saves-{{lookup @root.savesText @key}}">
+            {{#if (or ../../document.isOwned (not ../../document.isOwner))}}
+            {{save}}
+            {{else}}
+            <input type="number" name="system.savesAndAttack.{{@../key}}.{{@key}}" value="{{save}}" />
+            {{/if}}
+        </div>
+        {{/unless}} 
+        {{/each}}
+    </div>
+    {{/each}}
+</div>

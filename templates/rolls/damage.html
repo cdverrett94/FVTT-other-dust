@@ -1,0 +1,13 @@
+<div class="od-container od-roll">
+    <div class="od-header">{{weapon.name}} {{localize "OD.Equipment.Damage"}}</div>
+    <div class="dice-roll">
+        <div class="dice-result">
+            <div class="dice-formula">{{roll.formula}}</div>
+            <div class="dice-tooltip">{{{tooltip}}}</div>
+            <h4 class="dice-total">{{roll.total}}</h4>
+        </div>
+    </div>
+    <div class="damage-target" {{#if target.uuid}}data-target-uuid="{{target.uuid}}"{{/if}}>
+        <button>{{localize "OD.Equipment.Damage"}} {{#if target.uuid}}{{localize "OD.Target"}}{{else}}{{localize "OD.Selected"}}{{/if}}</button>
+    </div>
+</div>

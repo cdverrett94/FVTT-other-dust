@@ -1,0 +1,29 @@
+<div class="stat od-container">
+    <div class="stat-label od-header">{{localize "OD.Movement"}}</div>
+    <div class="stat-value">
+        {{document.system.movement}}
+    </div> 
+</div>
+
+<div class="stat od-container">
+    <div class="stat-label od-header">{{localize "OD.Combat.Attack"}}</div>
+    <div class="stat-value">
+        +{{document.system.combat.attack}}
+    </div> 
+</div>
+
+<div class="stat od-container">
+    <div class="stat-label od-header">{{localize "OD.Combat.ac.Abbreviation"}}</div>
+    <div class="stat-value">
+        {{document.system.combat.ac}}
+    </div> 
+</div>
+
+{{#each document.system.saves as | save |}}
+<div class="stat saving-throw od-container" data-save="{{@key}}">
+    <div class="stat-label od-header roll-save pointer">{{lookup ../savesText @key}}</div>
+    <div class="stat-value">
+        {{save}}
+    </div> 
+</div>
+{{/each}}

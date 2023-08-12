@@ -1,0 +1,50 @@
+<form>
+    <div class="od-header"><input type="text" class="character-name" name="name" value="{{document.name}}" /></div>
+    <div class="character-header">
+        <div class="details">
+            {{> "systems/other-dust/templates/actors/character/partials/details.html"}}
+        </div>
+        <div class="attributes">
+            {{> "systems/other-dust/templates/actors/character/partials/attributes.html"}}
+        </div>
+    </div>
+
+    <div class="sheet-body">
+        <div class="skills-list">
+            {{> "systems/other-dust/templates/actors/character/partials/character-skills.html"}}
+        </div>
+        <div class="stats-list saves-list">
+            {{> "systems/other-dust/templates/actors/character/partials/character-saves.html"}}
+        </div>
+        <div class="tabbed-content">
+            <div class="sheet-tabs">
+                <a class="nav-tab" data-tab="equipment">{{localize "OD.Equipment.Title"}}</a>
+                <a class="nav-tab" data-tab="notes">{{localize "OD.Notes"}}</a>
+            </div>
+            <div class="tab" data-tab="equipment">
+                <div class="equipment-tab">
+                    <div class="equipment-list">
+                        <div class="weapons">
+                            {{> "systems/other-dust/templates/actors/character/partials/equipment-list.html" equipments=document.weapons type="weapon"}}
+                        </div>
+
+                        <div class="armor">
+                            {{> "systems/other-dust/templates/actors/character/partials/equipment-list.html" equipments=document.armor type="armor"}}
+                        </div>
+
+                        <div class="gear">
+                            {{> "systems/other-dust/templates/actors/character/partials/equipment-list.html" equipments=document.gear type="gear"}}
+                        </div>
+                    </div>
+                    <div class="equipment-sidebar">
+                        {{> "systems/other-dust/templates/actors/character/partials/equipment-sidebar.html" }}
+                    </div>
+                </div>
+            </div>
+            <div class="tab" data-tab="notes">
+                Biography:
+                {{editor enrichedBiography target="system.details.biography" editable=true collaborate=true button=true engine="prosemirror"}}
+            </div>
+        </div>
+    </div>
+</form>

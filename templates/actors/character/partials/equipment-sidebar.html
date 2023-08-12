@@ -1,0 +1,48 @@
+<div class="encumbrance">
+    <div class="od-header">{{localize "OD.Equipment.Encumbrance.Ready.Readied"}}</div>
+    <div class="encumbrance-values">
+        <div>
+            {{document.system.encumbrance.readied.value}} / {{document.system.encumbrance.readied.max}}
+        </div>
+        <div class="encumbrance-status">
+            {{#unless (eq document.system.encumbrance.readied.status "unencumbered")}}
+                {{ encumbranceStatuses.readied }}
+            {{/unless}}
+        </div>
+    </div>
+</div>
+
+<div class="encumbrance">
+    <div class="od-header">{{localize "OD.Equipment.Encumbrance.Stow.Stowed"}}</div>
+    <div class="encumbrance-values">
+        <div>
+            {{document.system.encumbrance.stowed.value}} / {{document.system.encumbrance.stowed.max}}
+        </div>
+        <div class="encumbrance-status">
+            {{#unless (eq document.system.encumbrance.stowed.status "unencumbered")}}
+                {{ encumbranceStatuses.stowed }}
+            {{/unless}}
+        </div>
+    </div>
+</div>
+
+<div class="credits">
+    <div class="od-header">{{localize "OD.Details.Credits"}}</div>
+    <div class="credits-value">
+        <input type="text" name="system.currency.held" value="{{document.system.currency.held}}">
+    </div>
+</div>
+
+<div class="credits">
+    <div class="od-header">{{localize "OD.Details.Bank"}}</div>
+    <div class="credits-value">
+        <input type="text" name="system.currency.bank" value="{{document.system.currency.bank}}">
+    </div>
+</div>
+
+<div class="credits">
+    <div class="od-header">{{localize "OD.Total"}}</div>
+    <div class="credits-value">
+        {{add document.system.currency.bank document.system.currency.held}}
+    </div>
+</div>

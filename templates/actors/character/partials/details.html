@@ -1,0 +1,48 @@
+<div class="character-image">
+    <img src="{{document.img}}" data-tooltip="{{document.name}}" data-edit="img"/>
+</div>
+<div class="character-details">
+    <div class="character-class">
+        <div class="class item edit-item item-input pointer" data-item-id="{{document.class.id}}">
+            {{localize "OD.Details.Class.Title"}}:
+            <input type="text" name="system.details.class" value="{{document.class.name}}" disabled />
+        </div>
+        <div class="training item edit-item item-input pointer" data-item-id="{{document.training.id}}">
+            {{localize "OD.Details.Training"}}:
+            <input type="text" name="system.details.training" value="{{document.training.name}}" disabled />
+        </div>
+    </div>
+    <div class="character-background">
+        <div class="background item edit-item item-input pointer" data-item-id="{{document.background.id}}" >
+            {{localize "OD.Details.Background"}}:
+            <input type="text" name="system.details.background" value="{{document.background.name}}" disabled />
+        </div>
+        <div class="faction">
+            {{localize "OD.Details.Faction"}}:
+            <input type="text" name="system.details.faction" value="{{document.faction}}" />
+        </div>
+    </div>
+    <div class="character-numbers">
+        <div class="xp">
+            {{localize "OD.Details.XP"}}:
+            <input type="number" name="system.details.xp" value="{{document.system.details.xp}}" />
+        </div>
+        <div class="level">
+            {{localize "OD.Details.Level"}}:
+            <input type="number" name="system.details.level" value="{{document.system.details.level}}" />
+        </div>
+        <div class="current-hp">
+            {{localize "OD.Details.HP.Title"}}:
+            <input type="number" name="system.hp.value" value="{{document.system.hp.value}}" max="{{document.system.hp.max}}"
+            />
+        </div>
+        <div class="max-hp">
+            {{localize "OD.Details.HP.Max"}}:
+            <input type="number" name="system.hp.max" value="{{document.system.hp.max}}" disabled />
+        </div>
+        <div class="hit-die">
+            <span class="pointer">{{localize "OD.Details.HP.HD"}}: <i class="fa-solid fa-dice-d6"></i></span>
+            <input type="text" name="system.hp.hd" value="{{document.system.hp.hd}}" disabled />
+        </div>
+    </div>
+</div>

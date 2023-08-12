@@ -1,0 +1,27 @@
+<div class="skill-header od-header">{{localize "OD.Skills.Plural"}}</div>
+<div class="skills-container">
+    <div class="od-subheader">
+        <span class="skill-name">{{localize "OD.Name"}}</span>
+        <span class="skill-rank">{{localize "OD.Skills.Rank"}}</span>
+        <span class="edit-skill"></span>
+        <span class="delete-skill"></span>
+    </div>
+    <div class="od-subheader">
+        <span class="skill-name">{{localize "OD.Name"}}</span>
+        <span class="skill-rank">{{localize "OD.Skills.Rank"}}</span>
+        <span class="edit-skill"></span>
+        <span class="delete-skill"></span>
+    </div>
+    {{#each document.skills as | skill |}}
+    <div class="character-skill item" data-item-id="{{skill.id}}">
+        <span class="skill-name roll-skill pointer" data-tooltip="{{skill.name}}" data-tooltip-direction="UP">{{skill.name}}</span>
+        <span class="skill-rank">{{skill.rank}}</span>
+        <span class="edit-item pointer">
+            <i class="fas fa-edit"></i>
+        </span>
+        <span class="delete-item pointer">
+            <i class="fa-solid fa-trash-can"></i>
+        </span>
+    </div>
+    {{/each}}
+</div>

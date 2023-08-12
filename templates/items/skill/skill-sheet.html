@@ -1,0 +1,55 @@
+<form>
+    <div class="item-sheet skill-sheet">
+        <div class="od-header item-sheet-header">
+            {{#if (or document.isOwned (not document.isOwner))}}
+            {{document.name}}
+            {{else}}
+            <input type="text" name="name" value="{{document.name}}">
+            {{/if}}
+        </div>
+        <div class="skill-details">
+            <div>
+                <div>
+                    {{#if document.isOwned}}
+                    {{localize "OD.Attributes.Title"}}:
+                    {{else}}
+                    {{localize "OD.Skills.DefaultAttribute"}}:
+                    {{/if}}
+                </div>
+                <select name="system.attribute">
+                    {{#each attributes}}
+                    {{#with (lookup ../attributesText this)}}
+                    <option value="{{../this}}" {{#if (eq ../this ../../document.system.attribute)}}selected{{/if}}>{{title}}</option>
+                    {{/with}}
+                    {{/each}}
+                </select>
+            </div>
+            <div>
+                {{#if (or document.isOwned (not document.isOwner))}}
+                <div>{{localize "OD.Skills.Rank"}}:</div>
+                <select name="system.rank">
+                    <option value="-1" {{#if (eq document.system.rank -1)}}selected{{/if}}>-1 - {{localize "OD.Skills.Untrained"}}:</option>
+                    <option value="0" {{#if (eq document.system.rank 0)}}selected{{/if}}>0 - {{localize "OD.Skills.Trained"}}</option>
+                    <option value="1" {{#if (eq document.system.rank 1)}}selected{{/if}}>1 - {{localize "OD.Skills.Professional"}}</option>
+                    <option value="2" {{#if (eq document.system.rank 2)}}selected{{/if}}>2 - {{localize "OD.Skills.Expert"}}</option>
+                    <option value="3" {{#if (eq document.system.rank 3)}}selected{{/if}}>3 - {{localize "OD.Skills.Master"}}</option>
+                    <option value="4" {{#if (eq document.system.rank 4)}}selected{{/if}}>4 - {{localize "OD.Skills.Legendary"}}</option>
+                </select>
+                {{/if}}
+            </div>
+            <div>
+                <div>{{localize "OD.Skills.CombatSkill"}}</div>
+                <input type="checkbox" name="system.combat"{{#if document.system.combat}} checked{{/if}} />
+                
+            </div>
+        </div>
+        <div class="item-description{{#unless document.isOwned}} editable-item{{/unless}}">
+            {{#if (or document.isOwned (not document.isOwner))}}
+            {{{enrichedDescription}}}
+            {{else}}
+            {{editor enrichedDescription target="system.description" editable=(not document.isOwned) collaborate=true engine="prosemirror"}}
+            {{/if}}
+        </div>
+        
+    </div>
+</form>

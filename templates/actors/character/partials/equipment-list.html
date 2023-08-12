@@ -1,0 +1,45 @@
+<div class="od-header">
+    {{#if (eq type "weapon")}}{{localize "OD.Equipment.Weapons"}}{{/if}}
+    {{#if (eq type "armor")}}{{localize "OD.Equipment.Armor"}}{{/if}}
+    {{#if (eq type "gear")}}{{localize "OD.Equipment.Gear"}}{{/if}}
+</div>
+<div class="od-subheader item {{type}}-item equipment-item">
+    <div class="item-name">
+        <div></div>
+        <div>{{localize "OD.Name"}}</div>
+    </div>
+    <div><i class="fa-solid fa-weight-hanging"></i></div>
+    <div class="hide"><i class="fa-solid fa-shirt"></i></div>
+    <div class="hide"><i class="fa-solid fa-up-long"></i></div>
+    <div class="hide"><i class="fas fa-edit"></i></div>
+    <div class="hide"><i class="fa-solid fa-trash-can"></i></div>
+</div>
+{{#each equipments as | equipment |}}
+<div class="{{type}}-item item equipment-item" data-item-id="{{equipment.id}}">
+    <div class="item-name{{#if (eq type "weapon")}} roll-weapon pointer{{/if}}">
+        <div class="item-image">
+            <img src="{{equipment.img}}">
+        </div>
+        <div>{{equipment.name}}</div>
+    </div>
+    <div class="item-encumbrance">
+        {{equipment.system.encumbrance}}
+    </div>
+    <div class="equip-item pointer{{#if (eq equipment.system.status "readied")}} readied{{/if}}" data-tooltip="{{#if (eq equipment.system.status "readied")}}Unequip{{else}}Equip{{/if}} Item">
+        <i class="fa-solid fa-shirt"></i>
+    </div>
+    <div class="drop-item pointer{{#if (eq equipment.system.status "dropped")}} dropped{{/if}}" data-tooltip="{{#if (eq equipment.system.status "dropped")}}Pick Up{{else}}Drop{{/if}} Item">
+        {{#if (eq system.status "dropped")}}
+        <i class="fa-solid fa-up-long"></i>
+        {{else}}
+        <i class="fa-solid fa-down-long"></i>
+        {{/if}}
+    </div>
+    <div class="edit-item pointer">
+        <i class="fas fa-edit"></i>
+    </div>
+    <div class="delete-item pointer">
+        <i class="fa-solid fa-trash-can"></i>
+    </div>
+</div>           
+{{/each}}

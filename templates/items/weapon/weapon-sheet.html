@@ -1,0 +1,117 @@
+<form>
+    <div class="od-header item-sheet-header">
+        {{#if (or document.isOwned (not document.isOwner))}}
+        {{document.name}}
+        {{else}}
+        <input type="text" name="name" value="{{document.name}}">
+        {{/if}}
+    </div>
+    <div class="item-body">
+        <div class="equipment-image">
+            <img src="{{document.img}}" data-tooltip="{{document.name}}" data-edit="img"/>
+        </div>
+        <div class="item-details">
+            <div class="weapon-damage">
+                <div>{{localize "OD.Equipment.Damage"}}:</div>
+                <div>
+                    {{#if (or document.isOwned (not document.isOwner))}}
+                    {{{document.system.damage}}}
+                    {{else}}
+                    <input type="text" name="system.damage" value="{{document.system.damage}}" />
+                    {{/if}}
+                </div>
+            </div>
+            <div class="weapon-range">
+                <div>{{localize "OD.Equipment.Range"}}:</div>
+                <div>
+                    {{#if (or document.isOwned (not document.isOwner))}}
+                    {{{document.system.range}}}
+                    {{else}}
+                    <input type="text" name="system.range" value="{{document.system.range}}" />
+                    {{/if}}
+                </div>
+            </div>
+            <div class="weapon-magazine">
+                <div>{{localize "OD.Equipment.Magazine"}}:</div>
+                <div>
+                    {{#if (or document.isOwned (not document.isOwner))}}
+                    {{{document.system.magazine}}}
+                    {{else}}
+                    <input type="text" name="system.magazine" value="{{document.system.magazine}}" />
+                    {{/if}}
+                </div>
+            </div>
+            <div class="weapon-techLevel">
+                <div>{{localize "OD.Equipment.TechLevel"}}:</div>
+                <div>
+                    {{#if (or document.isOwned (not document.isOwner))}}
+                    {{{document.system.techLevel}}}
+                    {{else}}
+                    <input type="text" name="system.techLevel" value="{{document.system.techLevel}}" />
+                    {{/if}}
+                </div>
+                
+            </div>
+            <div class="weapon-skill">
+                <div>{{localize "OD.Skills.Singular"}}:</div>
+                <div>
+                    {{#if (or document.isOwned (not document.isOwner))}}
+                    {{{document.system.skill}}}
+                    {{else}}
+                    <input type="text" name="system.skill" value="{{document.system.skill}}" />
+                    {{/if}}
+                </div>
+            </div>
+            <div class="weapon-attribute">
+                <div>{{localize "OD.Attributes.Title"}}:</div>
+                <div>
+                    {{#if document.isOwner}}
+                    <select name="system.attribute">
+                        {{#each attributes}}
+                        {{#with (lookup ../attributesText this)}}
+                        <option value="{{../this}}" {{#if (eq ../this ../../document.system.attribute)}}selected{{/if}}>{{title}}</option>
+                        {{/with}}
+                        {{/each}}
+                    </select>
+                    {{else}}
+                    {{#with (lookup ../attributesText this)}}
+                    {{title}}
+                    {{/with}}
+                    {{/if}}
+
+                    
+                </div>
+            </div>
+            <div class="weapon-encumbrance">
+                <div>{{localize "OD.Equipment.Encumbrance.Title"}}:</div>
+                <div>
+                    {{#if (or document.isOwned (not document.isOwner))}}
+                    {{{document.system.encumbrance}}}
+                    {{else}}
+                    <input type="text" name="system.encumbrance" value="{{document.system.encumbrance}}" />
+                    {{/if}}
+                </div>
+            </div>
+            <div class="weapon-cost">
+                <div>{{localize "OD.Equipment.Cost"}}:</div>
+                <div>
+                    {{#if (or document.isOwned (not document.isOwner))}}
+                    {{{document.system.cost}}}
+                    {{else}}
+                    <input type="text" name="system.cost" value="{{document.system.cost}}" />
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item-description{{#unless document.isOwned}} editable-item{{/unless}}">
+        <div>{{localize "OD.Description"}}:</div>
+        <div>
+            {{#if (or document.isOwned (not document.isOwner))}}
+            {{{enrichedDescription}}}
+            {{else}}
+            {{editor enrichedDescription target="system.description" editable=(not document.isOwned) collaborate=true engine="prosemirror"}}
+            {{/if}}
+        </div>
+    </div>
+</form>

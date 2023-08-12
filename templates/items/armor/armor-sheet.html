@@ -1,0 +1,67 @@
+<form>
+    <div class="od-header item-sheet-header">
+        {{#if (or document.isOwned (not document.isOwner))}}
+        {{document.name}}
+        {{else}}
+        <input type="text" name="name" value="{{document.name}}">
+        {{/if}}
+    </div>
+    <div class="item-body">
+        <div class="equipment-image">
+            <img src="{{document.img}}" data-tooltip="{{document.name}}" data-edit="img"/>
+        </div>
+        <div class="item-details">
+            <div class="armor-ac">
+                <div>{{localize "OD.Combat.ac.Title"}}:</div>
+                <div>
+                    {{#if (or document.isOwned (not document.isOwner))}}
+                    {{{document.system.ac}}}
+                    {{else}}
+                    <input type="text" name="system.ac" value="{{document.system.ac}}" />
+                    {{/if}}
+                </div>
+            </div>
+            <div class="armor-encumbrance">
+                <div>{{localize "OD.Equipment.Encumbrance.Title"}}:</div>
+                <div>
+                    {{#if (or document.isOwned (not document.isOwner))}}
+                    {{{document.system.encumbrance}}}
+                    {{else}}
+                    <input type="text" name="system.encumbrance" value="{{document.system.encumbrance}}" />
+                    {{/if}}
+                </div>
+            </div>
+            <div class="armor-shield">
+                <div>{{localize "OD.Equipment.Shield"}}:</div>
+                <div>
+                    {{#if (or document.isOwned (not document.isOwner))}}
+                    {{{document.system.shield}}}
+                    {{else}}
+                    <input type="checkbox" name="system.shield" {{#if document.system.shield}}checked{{/if}}>
+                    {{/if}}
+                </div>
+                
+            </div>
+            <div class="armor-cost">
+                <div>{{localize "OD.Equipment.Cost"}}:</div>
+                <div>
+                    {{#if (or document.isOwned (not document.isOwner))}}
+                    {{{document.system.cost}}}
+                    {{else}}
+                    <input type="text" name="system.cost" value="{{document.system.cost}}" />
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item-description{{#unless document.isOwned}} editable-item{{/unless}}">
+        <div>{{localize "OD.Description"}}:</div>
+        <div>
+            {{#if (or document.isOwned (not document.isOwner))}}
+            {{{enrichedDescription}}}
+            {{else}}
+            {{editor enrichedDescription target="system.description" editable=(not document.isOwned) collaborate=true engine="prosemirror"}}
+            {{/if}}
+        </div>
+    </div>
+</form>

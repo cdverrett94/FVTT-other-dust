@@ -1,0 +1,31 @@
+<form>
+    <div class="item-sheet training-sheet">
+        <div class="od-header item-sheet-header">
+            {{#if (or document.isOwned (not document.isOwner))}}
+            {{document.name}}
+            {{else}}
+            <input type="text" name="name" value="{{document.name}}">
+            {{/if}}
+        </div>
+        <div class="item-description{{#unless document.isOwned}} editable-item{{/unless}}">
+            {{#if (or document.isOwned (not document.isOwner))}}
+            {{{enrichedDescription}}}
+            {{else}}
+            {{editor enrichedDescription target="system.description" editable=(not document.isOwned) collaborate=true engine="prosemirror"}}
+            {{/if}}
+        </div>
+        <div class="item-skills">
+            <div>
+                {{localize "OD.Skills.Plural"}}:
+            </div>
+            <div>
+                {{#if (or document.isOwned (not document.isOwner))}}
+                {{document.system.skillsText}}
+                {{else}}
+                <input type="text" name="system.skillsText" value="{{document.system.skillsText}}">
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</form>
+
