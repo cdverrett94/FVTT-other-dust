@@ -1,3 +1,4 @@
+import { attributeModifiers } from '../../constants.js';
 import { findHighestValue } from '../../helpers.js';
 
 export class ODActor extends Actor {
@@ -10,14 +11,7 @@ export class ODActor extends Actor {
     }
 
     computeAttributeModifiers() {
-        const modifiers = {
-            0: -2,
-            3: -2,
-            4: -1,
-            8: 0,
-            14: 1,
-            18: 2,
-        };
+        const modifiers = attributeModifiers;
 
         for (const attribute in this.system.attributes) {
             const score = this.system.attributes[attribute].score;
