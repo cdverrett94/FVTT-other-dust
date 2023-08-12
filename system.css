@@ -19,6 +19,17 @@
     color: white;
     padding: 5px;
     text-align: center;
+
+    & input {
+        background-color: var(--main-bg-color);
+        color: white;
+        border: none;
+        outline: none;
+
+        &:focus {
+            box-shadow: inset 0px 0px 5px;
+        }
+    }
 }
 
 .od-subheader {
@@ -28,31 +39,19 @@
     text-align: center;
 }
 
-.od-header input {
-    background-color: var(--main-bg-color);
-    color: white;
-    border: none;
-    outline: none;
-}
-
-.od-header input:focus {
-    background-color: var(--main-bg-color);
-    color: white;
-    border: none;
-    outline: none;
-    box-shadow: none;
-}
-
-.od-body {
+.od-header input .od-body {
     padding: 5px;
 }
 
-:is(.edit-item, .delete-item, .equip-item, .drop-item, .roll-weapon):not(.item-input) i {
+.edit-item,
+.delete-item,
+.equip-item,
+.drop-item {
     color: rgba(0, 0, 0, 0.5);
-}
 
-:is(.edit-item, .delete-item, .equip-item, .drop-item, .roll-weapon):not(.item-input):hover i {
-    color: black;
+    &:hover {
+        color: black;
+    }
 }
 
 .pointer:hover {
@@ -147,8 +146,6 @@
     }
     /* End Character Header */
 
-    /* End Attributes */
-
     .sheet-body {
         display: grid;
         grid-template-columns: repeat(10, 1fr);
@@ -182,6 +179,8 @@
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        direction: rtl;
+        text-align: left;
     }
 
     .character-skill :is(.skill-rank, .edit-item, .delete-item) {
